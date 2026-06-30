@@ -6,8 +6,6 @@ A modern, fully responsive E-Commerce web application built with **ReactJS**. Th
 
 ## 🚀 Live Demo
 
-> Add your deployed URL here
-
 ```
 https://your-live-demo.vercel.app
 ```
@@ -16,10 +14,8 @@ https://your-live-demo.vercel.app
 
 ## 📂 GitHub Repository
 
-> Add your repository link here
-
 ```
-https://github.com/yourusername/react-ecommerce
+https://github.com/Gouthamraju13/E-commerce-Web-Application
 ```
 
 ---
@@ -138,7 +134,7 @@ GET /products/:id
 # 📂 Project Structure
 
 ```
-react-ecommerce/
+Shopwave/
 │
 ├── src/
 │   ├── assets/
@@ -195,7 +191,7 @@ react-ecommerce/
 Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/react-ecommerce.git
+git clone https://github.com/Gouthamraju13/E-commerce-Web-Application.git
 ```
 
 ---
