@@ -7,7 +7,7 @@ A modern, fully responsive E-Commerce web application built with **ReactJS**. Th
 ## 🚀 Live Demo
 
 ```
-https://your-live-demo.vercel.app
+https://e-commerce-web-application-ex49tkb1m-gouthamraju13s-projects.vercel.app
 ```
 
 ---
