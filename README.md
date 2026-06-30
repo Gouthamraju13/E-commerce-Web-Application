@@ -104,27 +104,6 @@ https://github.com/Gouthamraju13/E-commerce-Web-Application
 
 ```
 https://fakeapi.platzi.com/
-
-```
-
-### Endpoints
-
-#### Get Products
-
-```
-GET /products
-```
-
-#### Get Categories
-
-```
-GET /categories
-```
-
-#### Get Single Product
-
-```
-GET /products/:id
 ```
 
 ---
