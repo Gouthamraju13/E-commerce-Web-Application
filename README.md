@@ -162,16 +162,6 @@ Shopwave/
 
 ---
 
-# ⚙️ Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/Gouthamraju13/E-commerce-Web-Application.git
-```
-
----
-
 # 🧩 State Management
 
 The application uses:
