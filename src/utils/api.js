@@ -13,8 +13,13 @@ const TRUSTED_IMAGE_HOSTS = [
 
 const KNOWN_CATEGORIES = [
   "clothes", "clothing", "electronics", "furniture", "shoes",
-  "miscellaneous", "shoe", "men's clothing", "women's clothing",
+  "miscellaneous", "shoe", "shoesk", "men's clothing", "women's clothing",
 ];
+
+const CLOTHES_CATEGORY_ID = "1";
+const CLOTHES_CATEGORY_NAMES = ["clothes", "clothing", "men's clothing", "women's clothing"];
+const FOOTWEAR_CATEGORY_ID = "4";
+const FOOTWEAR_CATEGORY_NAMES = ["shoes", "shoe", "shoesk", "footwear"];
 
 const hasTrustedImage = (url) => {
   if (!url) return false;
@@ -36,27 +41,63 @@ const isValidCategory = (c) =>
   hasTrustedImage(c.image) &&
   KNOWN_CATEGORIES.includes((c.name || "").trim().toLowerCase());
 
+const isClothesCategory = (category) =>
+  String(category?.id) === CLOTHES_CATEGORY_ID ||
+  CLOTHES_CATEGORY_NAMES.includes((category?.name || "").trim().toLowerCase());
+
+const normalizeCategory = (category) => {
+  if (!category) return category;
+  const name = (category.name || "").trim().toLowerCase();
+  if (String(category.id) === FOOTWEAR_CATEGORY_ID || FOOTWEAR_CATEGORY_NAMES.includes(name)) {
+    return { ...category, name: "Footwear" };
+  }
+  return category;
+};
+
+const normalizeProduct = (product) => ({
+  ...product,
+  category: normalizeCategory(product.category),
+});
+
+const limitClothesProducts = (products) => {
+  let clothesCount = 0;
+
+  return products.filter((product) => {
+    if (!isClothesCategory(product.category)) return true;
+    clothesCount += 1;
+    return clothesCount === 1;
+  });
+};
+
 export const fetchProducts = async ({ categoryId, offset = 0, limit = 20, title } = {}) => {
-  let url = `${BASE}/products?offset=${offset}&limit=${limit}`;
+  const catalogLimit = Math.max(200, offset + limit);
+  let url = `${BASE}/products?offset=0&limit=${catalogLimit}`;
   if (categoryId) url += `&categoryId=${categoryId}`;
   if (title) url += `&title=${encodeURIComponent(title)}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error("Failed to fetch products");
   const data = await res.json();
-  return data.filter(isValidProduct);
+  const products = data.filter(isValidProduct).map(normalizeProduct);
+
+  if (String(categoryId) === CLOTHES_CATEGORY_ID) {
+    return products.slice(0, 1).slice(offset, offset + limit);
+  }
+
+  return limitClothesProducts(products).slice(offset, offset + limit);
 };
 
 export const fetchProduct = async (id) => {
   const res = await fetch(`${BASE}/products/${id}`);
   if (!res.ok) throw new Error("Product not found");
-  return res.json();
+  const product = await res.json();
+  return normalizeProduct(product);
 };
 
 export const fetchCategories = async () => {
   const res = await fetch(`${BASE}/categories`);
   if (!res.ok) throw new Error("Failed to fetch categories");
   const data = await res.json();
-  return data.filter(isValidCategory);
+  return data.filter(isValidCategory).map(normalizeCategory);
 };
 
 export const cleanImageUrl = (raw) => {

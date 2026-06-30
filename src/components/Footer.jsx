@@ -13,8 +13,6 @@ export default function Footer() {
           <div>
             <h4>Shop</h4>
             <Link to="/products">All Products</Link>
-            <Link to="/products?categoryId=2">Electronics</Link>
-            <Link to="/products?categoryId=1">Clothing</Link>
           </div>
           <div>
             <h4>Account</h4>
