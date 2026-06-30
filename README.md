@@ -102,13 +102,7 @@ https://github.com/Gouthamraju13/E-commerce-Web-Application
 
 # 📦 API Used
 
-### Platzi Fake Store API
-
-Base URL
-
-```
-https://api.escuelajs.co/api/v1
-```
+Platzi Fake Store API
 
 ### Endpoints
 
