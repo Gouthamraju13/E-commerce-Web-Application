@@ -101,8 +101,9 @@ https://github.com/Gouthamraju13/E-commerce-Web-Application
 ---
 
 # 📦 API Used
-
+```
 Platzi Fake Store API
+```
 
 ### Endpoints
 
